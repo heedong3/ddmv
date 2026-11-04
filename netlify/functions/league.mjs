@@ -17,9 +17,6 @@ export default async function handler(request) {
       });
       return respond({ results, viewers });
     }
-    const configuredPin = process.env.LEAGUE_ADMIN_PIN;
-    if (!configuredPin) return respond({ error: 'Set LEAGUE_ADMIN_PIN in Netlify environment variables' }, 503);
-    if (request.headers.get('x-admin-pin') !== configuredPin) return respond({ error: 'Unauthorized' }, 401);
     const { id, field, value } = await request.json();
     if (!validId(id) || !['result', 'viewers'].includes(field)) return respond({ error: 'Invalid id/field' }, 400);
     if (field === 'result' && value !== null && (!Array.isArray(value) || value.length < 2 || value.length > 3 || value.some(x => !Array.isArray(x) || x.length !== 2 || x.some(n => !Number.isInteger(n) || n < 0 || n > 99) || x[0] === x[1]) || value.reduce((s,x)=>s+x[0]-x[1],0)===0)) return respond({ error: 'Invalid score' }, 400);
