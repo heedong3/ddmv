@@ -1,29 +1,20 @@
-# DDM KOREAN SERIES 2026
+# 2026 DDM KOREA SERIES — 공유 기록 버전
 
-## GitHub에 업로드할 파일
-
-GitHub 저장소 최상위에 이 폴더의 **내용물**을 그대로 업로드하세요:
-
-- `public/index.html` : 웹앱 화면 및 점수 입력
-- `public/logo.png` : 대회 로고
-- `netlify/functions/league.mjs` : 여러 기기에서 공유하는 기록 API
-- `netlify.toml` : Netlify 배포 설정
-- `package.json` : Netlify Blobs 의존성
+## GitHub에 올릴 파일
+저장소 최상위에 `public/`, `netlify/functions/`, `package.json`, `netlify.toml`을 그대로 배치합니다.
+기존 파일은 같은 경로에 덮어씁니다. `public/mikasa-ball.webp`도 꼭 업로드하세요.
 
 ## Netlify 연결
+1. Netlify에서 기존 GitHub 저장소에 연결된 사이트를 확인합니다.
+2. 변경 사항을 GitHub에 Commit 하면 Netlify가 자동으로 다시 배포합니다.
+3. Deploy log에서 Functions 배포 오류가 없는지 확인합니다.
+4. 사이트에서 경기 결과를 입력하고 다른 기기에서 10초 정도 후 같은 결과가 나오는지 확인합니다.
 
-1. GitHub 저장소를 만들고 위 파일/폴더를 업로드합니다.
-2. Netlify의 **Add new project → Import an existing project**에서 GitHub 저장소를 선택합니다.
-3. Build command는 비워 두고, Publish directory가 `public`인지 확인합니다. `netlify.toml`에 이미 적혀 있습니다.
-4. Netlify 사이트의 **Project configuration → Environment variables**에서 `LEAGUE_ADMIN_PIN`을 만들고 외부에 공개하지 않을 긴 PIN을 입력합니다. Functions 런타임에서 읽을 수 있도록 설정합니다.
-5. 배포 후 Netlify 제공 사이트 주소로 접속합니다. 기록을 처음 입력할 때 관리자 PIN을 한 번 묻습니다.
-6. 서로 다른 기기에서 같은 배포 URL을 열면 입력된 결과와 관람 학급이 최대 약 10초 간격으로 새로 고쳐집니다.
-
-### 주의
-
-- **Firebase를 사용하지 않습니다.** 점수와 관람 학급은 GitHub가 아니라 Netlify Blobs에 저장되며, GitHub/Netlify 재배포 이후에도 유지됩니다.
-- 기존 기기의 localStorage 기록은 자동으로 Netlify에 업로드되지 않습니다. 신규 사이트는 빈 결과로 시작합니다. 기존 기록이 있으면 경기별로 다시 저장해야 합니다.
-- Netlify Functions와 Blobs가 없는 단순 파일 실행에서는 이전처럼 브라우저 로컬 저장으로 동작합니다.
-- 화면이 공개되어 있어도 입력은 PIN을 아는 사람만 할 수 있습니다. PIN을 GitHub 파일에 적지 마세요.
-- 같은 경기의 점수를 동시에 다른 기기에서 수정하면 마지막으로 저장한 값이 적용될 수 있습니다.
-- 초기 배포 및 서비스 연결은 사용자의 GitHub/Netlify 계정에서 직접 진행해야 합니다.
+## 공유 저장 동작
+- Firebase 없음, PIN 없음. Netlify Functions + Netlify Blobs(`ddm-league-2026` 사이트 공용 저장소)를 사용합니다.
+- `LEAGUE_ADMIN_PIN` 환경변수는 더 이상 필요하지 않습니다.
+- 경기별로 저장해 다른 경기 입력이 덮어쓰기되는 위험을 줄였습니다.
+- 연결 오류가 뜨면 다른 기기에 저장됐다고 가정하지 마세요. Netlify의 Functions 로그를 확인하세요.
+- `index.html`을 직접 더블클릭해 열면 이 브라우저에만 저장됩니다. **모든 기기 공유는 배포된 Netlify URL에서만 작동합니다.**
+- PIN이 없으므로 사이트 주소를 아는 누구나 결과를 입력/수정/삭제할 수 있습니다. URL 공유 범위에 주의하세요.
+- 기존 브라우저 로컬 기록은 Netlify Blobs로 자동 이전되지 않습니다.
