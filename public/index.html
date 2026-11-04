@@ -27,6 +27,13 @@
 .brand img{width:75px;height:75px}
 .brand h1{font-size:clamp(26px,2.8vw,36px)}
 @media(min-width:901px) and (max-height:800px){.brand img{width:75px;height:75px}}
+  .rank th {
+  font-size: 15px;
+}
+
+.rank td {
+  font-size: 17px;
+}
 </style></head><body><header><div class="brand"><img src="logo.png" alt="DDM KOREAN SERIES 로고"><h1>DDM KOREAN SERIES</h1><div class="brandExtra"><div class="eyebrow">2026 DDM VOLLEYBALL</div><div class="sub">2026학년도 3학년 구기 한마당 · 1차 리그</div></div></div></header><main class="wrap"><div class="grid"><section class="panel"><h2>🏆 현재 순위 <small>경기 결과 입력 시 자동 갱신</small></h2><div class="rankZone"><table class="rank"><thead><tr><th>순위</th><th>학급</th><th>승</th><th>패</th><th>승률</th><th>경기수</th></tr></thead><tbody id="rank"></tbody></table><div class="rankWatermark upper">2차<br>상위<br>리그<br>진출</div><div class="rankWatermark lower">2차<br>패자<br>부활전<br>진출</div></div></section><section class="panel"><h2>🏐 리그 대진표 <small>셀 클릭 → 결과 입력</small></h2><div class="scroll"><table class="matrix" id="matrix"></table></div></section><section class="panel"><h2>📅 오늘의 경기 <small id="dateLabel"></small></h2><div class="toolbar"><input id="date" type="date"><button class="secondary" id="todayBtn">오늘</button><button class="secondary" id="prevBtn">◀ 전날</button><button class="secondary" id="nextBtn">다음날 ▶</button><button class="secondary" id="exportBtn">결과 CSV 저장</button></div><div id="matches"></div></section><section class="panel"><h2>👀 관람 학급 <small>경기당 최대 4개 반</small></h2><div id="viewers"></div><p class="note">학급 번호 입력 후 다른 칸으로 이동하면 자동 저장되며 다른 기기에도 공유됩니다.</p></section></div></main><div class="footer">2026 DDM KOREAN SERIES by Hee</div><div id="edgeVolleyball" class="edgeVolleyball" aria-hidden="true"><img src="mikasa-ball.webp" alt=""></div><div class="modalBack" id="modalBack"><div class="modal"><h2 id="modalTitle">경기 결과 입력</h2><div class="sub">세트별 양 팀 득점을 입력하세요. 총 득점으로 승패를 결정합니다. 미진행 세트는 비워 두세요.</div><div id="scoreInputs"></div><div id="validation" style="color:#ffb1a8;font-size:13px"></div><div class="actions"><button class="secondary" id="deleteBtn">결과 삭제</button><button class="secondary" id="cancelBtn">닫기</button><button id="saveBtn">결과 저장</button></div></div></div><script>
 
 // 배포된 Netlify 사이트에서는 모든 기기가 동일한 기록을 공유합니다.
