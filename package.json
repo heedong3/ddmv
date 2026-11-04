@@ -1,0 +1,9 @@
+{
+  "name": "ddm-volleyball-2026",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^11.1.4"
+  }
+}
